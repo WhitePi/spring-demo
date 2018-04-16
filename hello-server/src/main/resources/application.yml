@@ -1,0 +1,32 @@
+server:
+    port: 8085
+ 
+logging: 
+    level:
+      com.xutj: debug
+    file: logs/helloServer.log
+ 
+#jasypt 加密
+#jasypt.encryptor.password: xutj
+
+eureka:  
+    instance:
+        hostname: localhost
+        preferIPAddress: true          #优先使用IP地址作为主机名的标识 
+        instance-id: ${spring.cloud.client.ipAddress}:${spring.application.name}:${server.port} #修改instanceId
+    client:
+        serviceUrl:
+              defaultZone: http://localhost:1111/eureka/
+
+spring:
+    application:
+        name: hello-service
+
+#定义各种额外的详情给服务端显示  (从pom.xml中获取 )   
+info:
+    app:  
+        name: "@project.name@"
+        description: "@project.description@"  
+        version: "@project.version@"  
+        spring-boot-version: "@project.parent.version@"
+
